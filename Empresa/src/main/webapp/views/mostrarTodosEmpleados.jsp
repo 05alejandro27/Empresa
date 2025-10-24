@@ -18,38 +18,34 @@
         <h1>Mostrar todos los empleados</h1>
     </header>
 
-    <table border="1">
-        <tr>
-            <td>Nombre</td>
-            <td>Dni</td>
-            <td>Sexo</td>
-            <td>Categoria</td>
-            <td>Anyos</td>
-        </tr>
-        <c:forEach var="empleado" items="${lista}">
+    <div id="tabla">
+        <table border="2px" class="tablaBorde">
             <tr>
-                <%---Esto sería en caso de que en un futuro nos pidieran modificar el cliente
-                    <td>
-                        <a href="empleado?opcion=meditar&id=<c:out value="${ empleado.dni}"></c:out>">
-                            <c:out value="${ empleado.dni}"></c:out>
-                        </a>
-                    </td>
-                --%>
-
-                <td><c:out value="${ empleado.nombre}"></c:out></td>
-                <td><c:out value="${ empleado.dni}"></c:out></td>
-                <td><c:out value="${ empleado.sexo}"></c:out></td>
-                <td><c:out value="${ empleado.categoria}"></c:out></td>
-                <td><c:out value="${ empleado.anyos}"></c:out></td>
-
+                <th>Nombre</th>
+                <th>Dni</th>
+                <th>Sexo</th>
+                <th>Categoria</th>
+                <th>Años trabajados</th>
             </tr>
-        </c:forEach>
-    </table>
+            <c:forEach var="empleado" items="${lista}">
+                <tr>
 
-    <a href="${pageContext.request.contextPath}/index.jsp">
-        <button type="button">Volver</button>
-    </a>
+                    <td><c:out value="${ empleado.nombre}"></c:out></td>
+                    <td><c:out value="${ empleado.dni}"></c:out></td>
+                    <td><c:out value="${ empleado.sexo}"></c:out></td>
+                    <td><c:out value="${ empleado.categoria}"></c:out></td>
+                    <td><c:out value="${ empleado.anyos}"></c:out></td>
 
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
+
+    <footer>
+        <a href="${pageContext.request.contextPath}/index.jsp">
+            <button class="boton">Volver</button>
+        </a>
+    </footer>
 
 </body>
 </html>

@@ -11,8 +11,9 @@
     <header>
         <h1>Menu de Opciones Empleados</h1>
     </header>
+
     <div id="tabla">
-        <table border="1">
+        <table border="2px" class="tablaBorde">
             <tr>
                 <td><a href="empresa?opcion=mostrarEmpleado"> Mostrar todos los empleado</a></td>
             </tr>
@@ -24,5 +25,8 @@
             </tr>
         </table>
     </div>
+
+    <footer>
+    </footer>
 </body>
 </html>

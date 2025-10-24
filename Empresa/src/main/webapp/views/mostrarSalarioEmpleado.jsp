@@ -19,25 +19,28 @@
         <h1>Mostrar salario de un empleado concreto</h1>
     </header>
 
-    <form action="empresa" method="post">
-    <input type="hidden" name="opcionFormulario" value="buscarSalario">
-    <table border="1">
-        <tr>
-            <td>Dni:</td>
-            <td><input type="text" name="dni" size="9"></td>
-        </tr>
-    </table>
-    <input type="submit" value="buscar">
-    </form>
+    <div id="tabla">
+        <form action="empresa" method="post">
+            <input type="hidden" name="opcionFormulario" value="buscarSalario">
+            <table border="2px" class="tablaBorde">
+                <tr>
+                    <th>Dni:</th>
+                    <td><input class="barraBusqueda" type="text" name="dni" size="9"></td>
+                </tr>
+            </table>
+            <input class="boton" type="submit" value="Buscar">
+        </form>
 
-    <c:if test="${dni != null}">
-        <p>El empleado con dni ${dni} cobra ${salario}€</p>
-    </c:if>
+        <c:if test="${dni != null}">
+            <p>El empleado con dni ${dni} cobra ${salario}€</p>
+        </c:if>
+    </div>
 
-    <a href="${pageContext.request.contextPath}/index.jsp">
-        <button type="button">Volver</button>
-    </a>
-
+    <footer>
+        <a href="${pageContext.request.contextPath}/index.jsp">
+            <button class="boton">Volver</button>
+        </a>
+    </footer>
 
 </body>
 </html>

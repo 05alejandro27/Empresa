@@ -18,47 +18,50 @@
         <h1>Modificar un empleado</h1>
     </header>
 
-    <form action="empresa" method="post">
-    <input type="hidden" name="opcionFormulario" value="buscarEmpleado">
-    <table border="1">
-        <tr>
-            <td>Dni:</td>
-            <td><input type="text" name="dni" size="9"></td>
-        </tr>
-    </table>
-    <input type="submit" value="buscar">
-    </form>
-
-    <c:if test="${empleado != null}">
+    <div id="tabla">
         <form action="empresa" method="post">
-            <input type="hidden" name="opcionFormulario" value="modificarEmpleado">
-            <input type="hidden" name="dni" value="${empleado.dni}">
-            <table border="1">
+            <input type="hidden" name="opcionFormulario" value="buscarEmpleado">
+            <table border="2px" class="tablaBorde">
                 <tr>
-                    <td>Nombre:</td>
-                    <td><input type="text" name="nombre" value="${empleado.nombre}" size="50"></td>
-                </tr>
-                <tr>
-                    <td>Sexo:</td>
-                    <td><input type="text" name="sexo" value="${empleado.sexo}" size="50"></td>
-                </tr>
-                <tr>
-                    <td>Categoria:</td>
-                    <td><input type="text" name="categoria" value="${empleado.categoria}" size="50"></td>
-                </tr>
-                <tr>
-                    <td>Años trabajados:</td>
-                    <td><input type="text" name="anyosTrabajados" value="${empleado.categoria}" size="50"></td>
+                    <th>Dni:</th>
+                    <td><input class="barraBusqueda" type="text" name="dni" size="9"></td>
                 </tr>
             </table>
-            <input type="submit" value="modificar">
+            <input class="boton" type="submit" value="Buscar">
         </form>
-    </c:if>
 
-    <a href="${pageContext.request.contextPath}/index.jsp">
-        <button type="button">Volver</button>
-    </a>
+        <c:if test="${empleado != null}">
+            <form action="empresa" method="post">
+                <input type="hidden" name="opcionFormulario" value="modificarEmpleado">
+                <input type="hidden" name="dni" value="${empleado.dni}">
+                <table border="2px" class="tablaBorde">
+                    <tr>
+                        <th>Nombre:</th>
+                        <td><input class="barraBusqueda" type="text" name="nombre" value="${empleado.nombre}" size="50"></td>
+                    </tr>
+                    <tr>
+                        <th>Sexo:</th>
+                        <td><input class="barraBusqueda" type="text" name="sexo" value="${empleado.sexo}" size="50"></td>
+                    </tr>
+                    <tr>
+                        <th>Categoria:</th>
+                        <td><input class="barraBusqueda" type="text" name="categoria" value="${empleado.categoria}" size="50"></td>
+                    </tr>
+                    <tr>
+                        <th>Años trabajados:</th>
+                        <td><input class="barraBusqueda" type="text" name="anyosTrabajados" value="${empleado.categoria}" size="50"></td>
+                    </tr>
+                </table>
+                <input class="boton" type="submit" value="Modificar">
+            </form>
+        </c:if>
+    </div>
 
+    <footer>
+        <a href="${pageContext.request.contextPath}/index.jsp">
+            <button class="boton">Volver</button>
+        </a>
+    </footer>
 
 </body>
 </html>
