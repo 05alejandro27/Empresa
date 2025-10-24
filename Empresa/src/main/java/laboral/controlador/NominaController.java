@@ -49,6 +49,7 @@ public class NominaController extends HttpServlet {
                 List<Empleado> lista = new ArrayList<>();
 
                 try {
+
                     lista = empleadoDAO.informacionTodosEmpleados();
                     for (Empleado empleado : lista) {
                         System.out.println(empleado);
@@ -59,8 +60,9 @@ public class NominaController extends HttpServlet {
                     requestDispatcher.forward(request, response);
 
                 } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    System.out.println(e.getMessage());
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/error.jsp");
+                    requestDispatcher.forward(request, response);
                 }
 
                 break;
@@ -68,15 +70,35 @@ public class NominaController extends HttpServlet {
             case "mostrarSalarioEmpleado": {
                 System.out.println("Usted a presionado la opcion mostrarSalarioEmpleado");
 
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/mostrarSalarioEmpleado.jsp");
-                requestDispatcher.forward(request, response);
+                try{
+
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/mostrarSalarioEmpleado.jsp");
+                    requestDispatcher.forward(request, response);
+
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    request.setAttribute("error", e);
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/error.jsp");
+                    requestDispatcher.forward(request, response);
+                }
 
                 break;
             }
             case "modificarUnEmpleados": {
+
                 System.out.println("Usted a presionado la opcion modificarUnEmpleados");
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/modificarUnEmpleados.jsp");
-                requestDispatcher.forward(request, response);
+
+                try {
+
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/modificarUnEmpleados.jsp");
+                    requestDispatcher.forward(request, response);
+
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    request.setAttribute("error", e);
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/error.jsp");
+                    requestDispatcher.forward(request, response);
+                }
 
                 break;
             }
@@ -100,90 +122,111 @@ public class NominaController extends HttpServlet {
             case "buscarSalario": {
                 System.out.println("Usted a presionado la opcion buscar empleado para modificar empleado");
 
-                String dni =  request.getParameter("dni");
+                try {
 
-                EmpleadoDAO empleadoDAO = new EmpleadoDAO();
-                double salario = empleadoDAO.salarioPersona(dni);
+                    String dni =  request.getParameter("dni");
 
-                request.setAttribute("salario", salario);
-                request.setAttribute("dni", dni);
+                    EmpleadoDAO empleadoDAO = new EmpleadoDAO();
+                    double salario = empleadoDAO.salarioPersona(dni);
 
-                System.out.println("Registro guardado satisfactoriamente...");
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/mostrarSalarioEmpleado.jsp");
-                requestDispatcher.forward(request, response);
+                    request.setAttribute("salario", salario);
+                    request.setAttribute("dni", dni);
+
+                    System.out.println("Registro guardado satisfactoriamente...");
+
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/mostrarSalarioEmpleado.jsp");
+                    requestDispatcher.forward(request, response);
+
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    request.setAttribute("error", e);
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/error.jsp");
+                    requestDispatcher.forward(request, response);
+                }
 
                 break;
             }
             case "buscarEmpleado": {
                 System.out.println("Usted a presionado la opcion buscar empleado");
 
-                String dni =  request.getParameter("dni");
-                EmpleadoDAO empleadoDAO = new EmpleadoDAO();
-                Empleado empleado = empleadoDAO.empleadoPorDni(dni);
+                try {
 
-                request.setAttribute("empleado", empleado);
-                request.setAttribute("dni", dni);
+                    String dni =  request.getParameter("dni");
+                    EmpleadoDAO empleadoDAO = new EmpleadoDAO();
+                    Empleado empleado = empleadoDAO.empleadoPorDni(dni);
+
+                    request.setAttribute("empleado", empleado);
+                    request.setAttribute("dni", dni);
 
 
-                System.out.println("Registro guardado satisfactoriamente...");
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/modificarUnEmpleados.jsp");
-                requestDispatcher.forward(request, response);
+                    System.out.println("Registro guardado satisfactoriamente...");
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/modificarUnEmpleados.jsp");
+                    requestDispatcher.forward(request, response);
+
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    request.setAttribute("error", e);
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/error.jsp");
+                    requestDispatcher.forward(request, response);
+                }
 
                 break;
             }
             case "modificarEmpleado": {
                 System.out.println("Usted a presionado la opcion para modificar empleado");
 
-                String dni =  request.getParameter("dni");
-                EmpleadoDAO empleadoDAO = new EmpleadoDAO();
-                Empleado emp = empleadoDAO.empleadoPorDni(dni);
-
-                String nombre = request.getParameter("nombre");
-                String sexoString = request.getParameter("sexo");
-                String categoriaString = request.getParameter("categoria");
-                String anyosTrabajadosString = request.getParameter("anyosTrabajados");
-
-                if(nombre == null || nombre.isEmpty()) {
-                    nombre = emp.getNombre();
-                }
-
-                char sexo;
-                if(sexoString == null || sexoString.isEmpty()) {
-                    sexo = emp.getSexo();
-                } else {
-                    sexo = sexoString.charAt(0);
-                }
-
-                int categoria = 0;
-                if(categoriaString == null || categoriaString.isEmpty()) {
-                    categoria = emp.getCategoria();
-                } else {
-                    categoria = Integer.parseInt(categoriaString);
-                }
-
-                int anyosTrabajados = 0;
-                if(anyosTrabajadosString == null || anyosTrabajadosString.isEmpty()) {
-                    anyosTrabajados = emp.getAnyos();
-                } else {
-                    anyosTrabajados = Integer.parseInt(anyosTrabajadosString);
-                }
-
-                Empleado empleadoEnviar = null;
                 try {
+
+                    String dni =  request.getParameter("dni");
+                    EmpleadoDAO empleadoDAO = new EmpleadoDAO();
+                    Empleado emp = empleadoDAO.empleadoPorDni(dni);
+
+                    String nombre = request.getParameter("nombre");
+                    String sexoString = request.getParameter("sexo");
+                    String categoriaString = request.getParameter("categoria");
+                    String anyosTrabajadosString = request.getParameter("anyosTrabajados");
+
+                    if(nombre == null || nombre.isEmpty()) {
+                        nombre = emp.getNombre();
+                    }
+
+                    char sexo;
+                    if(sexoString == null || sexoString.isEmpty()) {
+                        sexo = emp.getSexo();
+                    } else {
+                        sexo = sexoString.charAt(0);
+                    }
+
+                    int categoria = 0;
+                    if(categoriaString == null || categoriaString.isEmpty()) {
+                        categoria = emp.getCategoria();
+                    } else {
+                        categoria = Integer.parseInt(categoriaString);
+                    }
+
+                    int anyosTrabajados = 0;
+                    if(anyosTrabajadosString == null || anyosTrabajadosString.isEmpty()) {
+                        anyosTrabajados = emp.getAnyos();
+                    } else {
+                        anyosTrabajados = Integer.parseInt(anyosTrabajadosString);
+                    }
+
+                    Empleado empleadoEnviar = null;
 
                     empleadoEnviar = new Empleado(nombre, dni, sexo, categoria, anyosTrabajados);
                     empleadoDAO.actualizarEmpleado(empleadoEnviar);
                     request.setAttribute("empleadoEnviar", empleadoEnviar);
 
-                } catch (DatosNoCorrectosException e) {
+                    System.out.println("Registro guardado satisfactoriamente...");
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/modificarUnEmpleados.jsp");
+                    requestDispatcher.forward(request, response);
 
-                    throw new RuntimeException(e);
-
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    request.setAttribute("error", e);
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/error.jsp");
+                    requestDispatcher.forward(request, response);
                 }
-
-                System.out.println("Registro guardado satisfactoriamente...");
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/modificarUnEmpleados.jsp");
-                requestDispatcher.forward(request, response);
 
                 break;
             }

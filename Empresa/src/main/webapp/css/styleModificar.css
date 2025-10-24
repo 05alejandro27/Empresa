@@ -51,22 +51,6 @@ table th {
 }
 
 .boton {
-
-    /* Establece la imagen de fondo y su ruta */
-    background-image: url("iconoVolver.png");
-
-    /* Evita que el icono se repita */
-    background-repeat: no-repeat;
-
-    /* Define la posición del icono */
-    background-position: left 10px center;
-
-    /* Ajusta el tamaño del icono */
-    background-size: 20px;
-
-    /* Separa el texto del icono para que no se superpongan */
-    padding-left: 40px;
-
     padding: 10px;
     margin: 10px;
     background: #b3e5e0;
